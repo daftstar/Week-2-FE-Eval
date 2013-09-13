@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Week 2 Frontend Project</title>
+  <title>Week 2 Frontend Project - a tiny library</title>
   <style type="text/css">
     #templates { display: none; }
     small { position: fixed; bottom: 4px; right: 4px; }
@@ -8,9 +8,11 @@
 
     #library .book {
       background: #ccc;
-      width: 200px;
-      float: left;
+      width: 400px;
+      float: clear;
       padding: 1px 20px;
+      margin-top: 5px;
+      margin-bottom: 10px;
     }
     #library .book h3 {
       font-style: italic;
@@ -31,7 +33,11 @@
 <div id="templates">
   <script class="book" type="text/template">
     <div class="book">
-        <p><%= title %> <%= author %> <%= status %> </p>
+        <p>
+        <h3><%= title %></h3>
+        <h5><%= author %></h5>
+        <h5><%= status %></h5>
+        </p>
     </div>
   </script>
 </div>
