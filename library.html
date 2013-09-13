@@ -4,6 +4,8 @@
   <style type="text/css">
     #templates { display: none; }
     small { position: fixed; bottom: 4px; right: 4px; }
+
+
     #library .book {
       background: #ccc;
       width: 200px;
@@ -23,15 +25,30 @@
 <h1>THE LIBRARY</h1>
 
 
+
 <div id="library"></div>
 
 <div id="templates">
-
+  <script class="book" type="text/template">
+    <div class="book">
+        <p><%= title %> <%= author %> <%= status %> </p>
+    </div>
+  </script>
 </div>
+
+
+
+
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script type="text/javascript">
+
+  var libraryTemplateHtml = $('#templates .book').html();
+  var libraryTemplate = _.template(libraryTemplateHtml);
+
+
 
 
 var books = [
@@ -49,19 +66,20 @@ var books = [
 ];
 
 
-
   for (var i = 0; i < books.length; i += 1) {
     var x = books[i];
-    //alert(x.name),
-    console.log(x.title, x.author, x.status)
+
+
+      var newLibHtml = libraryTemplate(x);
+      $('#library').append(newLibHtml);
+
+      //console.log(x.title, x.author, x.status)
   };
 
 
 
 
 
-
-  // TODO
 </script>
 
 <small>It's back.</small>
