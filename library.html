@@ -8,27 +8,38 @@
     #templates { display: none; }
     small { position: fixed; bottom: 4px; right: 4px; }
 
-
+    /*#library .book = the background displayed for each book, title author (the blue blob)*/
     #library .book {
       background: #0AC5F4;
-      width: 800px;
+      width: 600px;
       float: left;
       padding: 1px 20px;
+
+      /*Could combine all of below into one statement margin: 5px, 10px, 50px, 3px but keeping individual for ease of reading. */
       margin-top: 5px;
       margin-bottom: 10px;
+      margin-left: 40px;
+
+      /* adds soft border edges to each blue blob */
       border-radius:3px;
     }
+
+    /* adds h3 styling - addresses the book title */
     #library .book h3 {
       font-style: italic;
       color: white;
       font-family: 'Lato', sans-serif;
     }
+
+    /* adds h5 styling - addresses the book author and availability */
     #library .book h5 {
       font-family: 'Lato', sans-serif;
       font-weight: normal;
       color: white;
     }
 
+
+    /* adds h1 styling - addresses the page's title "The Library" */
     h1 {
       font-family: 'Lato', sans-serif;
       color: gray;
@@ -43,9 +54,11 @@
 <h1>THE LIBRARY</h1>
 
 
+<!-- The library div acts as a container for the templates-->
+ <div id="library"></div>
 
-<div id="library"></div>
 
+<!-- This nested #templates .book is what creates one instance of each book -->
 <div id="templates">
   <script class="book" type="text/template">
     <div class="book">
@@ -87,16 +100,22 @@ var books = [
   }
 ];
 
+  // wraps for loop into one function for ease of use - also much cleaner code. 
+  var renderLibrary = function() {
 
-  for (var i = 0; i < books.length; i += 1) {
-    var x = books[i];
+    // iterates through the each of the books 
+    for (var i = 0; i < books.length; i += 1) {
+      var x = books[i];
 
+        // for each book iterated through, the title, author and status are passed to the library div listed in HTML.  
 
-      var newLibHtml = libraryTemplate(x);
-      $('#library').append(newLibHtml);
-
-      //console.log(x.title, x.author, x.status)
+        var newLibHtml = libraryTemplate(x);
+        $('#library').append(newLibHtml);
+    }
   };
+
+// calls the renderLibrary function, which iterates through the books array. 
+renderLibrary();
 
 
 
@@ -104,7 +123,8 @@ var books = [
 
 </script>
 
-<small>It's back.</small>
+<!-- I don't need no reminder of last Friday.  That shite made me cry <inside> 
+ --><!-- <small>It's back.</small> -->
 
 </body>
 </html>
