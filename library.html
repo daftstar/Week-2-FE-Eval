@@ -51,7 +51,7 @@
       color: gray;
     }
 
-    .user_input {
+    .user-input {
       background: #0AC5F4;
       width: 620px;
       float: left;
@@ -68,12 +68,12 @@
       color: white;
     }
 
-    .user_input .book_name {
+    .user-input .book-name {
       height: 10px;
       float:left;
     }
 
-    .user_input .author_name {
+    .user-input .author-name {
      height: 10px;
      margin-left: 250px;
     }
@@ -95,13 +95,13 @@
 
 
   <!--   Need to style this - will add CSS later. -->  
-  <div class = "user_input">
-    <div class = "book_name">
-      <h5>Book Name <input id="new_title" type="text"></input></h5>
+  <div class="user-input">
+    <div class="book-name">
+      <h5>Book Name <input id="new-title" type="text"></input></h5>
     </div>
 
-    <div class = "author_name">
-      <h5>Author <input id="new_author" type="text"></input></h5>
+    <div class="author-name">
+      <h5>Author <input id="new-author" type="text"></input></h5>
     </div>
     
     
@@ -115,16 +115,17 @@
 
   <!-- This nested #templates .book is what creates one instance of each book -->
   <div id="templates">
+    
     <script class="book" type="text/template">
-
       <div class="book">
           <p>
           <h3><%= title %></h3>
           <h5><%= author %></h5>
-          <h5> > <%= status %></h5>
+          <h5> &gt; <%= status %></h5>
           </p>
       </div>
     </script>
+  
   </div>
 
 
@@ -157,17 +158,18 @@
   ];
 
   // ------------- BOOKS ARRAY ----------------------------// 
-    // wraps for loop into one function for ease of use - also much cleaner code. 
-  var renderLibrary = function() {
+  // wraps for loop into one function for ease of use - also much cleaner code. 
+  var renderLibrary = function () {
+
     // iterates through the each of the books 
     for (var i = 0; i < books.length; i += 1) {
-      var x = books[i];
+      var book = books[i];
 
-        // for each book iterated through, the title, author and status are passed to the library div listed in HTML.  
-        var newLibHtml = libraryTemplate(x);
+      // for each book iterated through, the title, author and status are passed to the library div listed in HTML.  
+      var newLibHtml = libraryTemplate(book);
 
-        // this .append command adds the object vs replacing the prior one. 
-        $('#library').append(newLibHtml);
+      // this .append command adds the object vs replacing the prior one. 
+      $('#library').append(newLibHtml);
     }
   };
 
@@ -178,18 +180,18 @@
   
   //this is an event handler.  It recieves the values submitted by the title and author fields. 
   $('#submit').on('click', function () {
-    var new_title = $("#new_title").val();
-    var new_author = $("#new_author").val();
+    var newTitle = $("#new-title").val();
+    var newAuthor = $("#new-author").val();
     
-  // this takes the values received and submits them to the values: title and author. 
-  // book status is hardcoded as available.  
+    // this takes the values received and submits them to the values: title and author. 
+    // book status is hardcoded as available.  
     var newLibHtml = libraryTemplate({ 
-      title: new_title, 
-      author: new_author,
+      title: newTitle, 
+      author: newAuthor,
       status: "available"
-   });
+    });
 
-   $('#library').append(newLibHtml); 
+    $('#library').append(newLibHtml); 
   });
 
 
