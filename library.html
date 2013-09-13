@@ -68,6 +68,23 @@
       color: white;
     }
 
+    .user_input .book_name {
+      height: 10px;
+      float:left;
+    }
+
+    .user_input .author_name {
+     height: 10px;
+     margin-left: 250px;
+    }
+
+    #submit {
+    font-family: 'Lato', sans-serif;
+    background-color: white;
+    font-size: 1em;
+    margin-left: 10px;
+
+    }
 
   </style>
 </head>
@@ -78,9 +95,15 @@
 
 
   <!--   Need to style this - will add CSS later. -->  
-  <div class = user_input>
-    <h5>Book Name <input id="new_title" type="text"></input></h5>
-    <h5>Author <input id="new_author" type="text"></input></h5>
+  <div class = "user_input">
+    <div class = "book_name">
+      <h5>Book Name <input id="new_title" type="text"></input></h5>
+    </div>
+
+    <div class = "author_name">
+      <h5>Author <input id="new_author" type="text"></input></h5>
+    </div>
+    
     
     <h5><input id="submit" type="button" value="submit"></input></h5>
   </div>
