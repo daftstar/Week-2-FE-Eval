@@ -24,6 +24,12 @@
       border-radius:3px;
     }
 
+    /* adds soft green hover effect when mouseover book object */
+    #library .book:hover {
+      background-color:#0AC5AF;
+
+    }
+
     /* adds h3 styling - addresses the book title */
     #library .book h3 {
       font-style: italic;
@@ -45,31 +51,58 @@
       color: gray;
     }
 
+    .user_input {
+      background: #0AC5F4;
+      width: 620px;
+      float: left;
+      padding: 1px 10px;
+
+      /*Could combine all of below into one statement margin: 5px, 10px, 50px, 3px but keeping individual for ease of reading. */
+      margin-top: 1px;
+      margin-bottom: 10px;
+      margin-left: 40px;
+
+      /* adds soft border edges to each blue blob */
+      border-radius:3px;
+      font-family: 'Lato', sans-serif;
+      color: white;
+    }
 
 
   </style>
 </head>
 <body>
 
-<h1>THE LIBRARY</h1>
+  <h1>THE LIBRARY</h1>
 
 
-<!-- The library div acts as a container for the templates-->
- <div id="library"></div>
+
+  <!--   Need to style this - will add CSS later. -->  
+  <div class = user_input>
+    <h5>Book Name <input id="new_title" type="text"></input></h5>
+    <h5>Author <input id="new_author" type="text"></input></h5>
+    
+    <h5><input id="submit" type="button" value="submit"></input></h5>
+  </div>
 
 
-<!-- This nested #templates .book is what creates one instance of each book -->
-<div id="templates">
-  <script class="book" type="text/template">
-    <div class="book">
-        <p>
-        <h3><%= title %></h3>
-        <h5><%= author %></h5>
-        <h5><%= status %></h5>
-        </p>
-    </div>
-  </script>
-</div>
+  <!-- The library div acts as a container for the templates-->
+  <div id="library"></div>
+
+
+  <!-- This nested #templates .book is what creates one instance of each book -->
+  <div id="templates">
+    <script class="book" type="text/template">
+
+      <div class="book">
+          <p>
+          <h3><%= title %></h3>
+          <h5><%= author %></h5>
+          <h5> > <%= status %></h5>
+          </p>
+      </div>
+    </script>
+  </div>
 
 
 
@@ -83,40 +116,58 @@
   var libraryTemplateHtml = $('#templates .book').html();
   var libraryTemplate = _.template(libraryTemplateHtml);
 
+// ------------- BOOKS ARRAY ----------------------------// 
 
+  var books = [
+    {
+      title: "The Hitchhiker's Guide to the Galaxy",
+      author: "DOUGLAS ADAMS",
+      status: 'available'
+    },
 
+    // next book (best practice is to NOT hardcode values)
+    {
+      title: "Absurdistan",
+      author: "GARY SHTEYNGART",
+      status: 'available'
+    }
+  ];
 
-var books = [
-  {
-    title: "The Hitchhiker's Guide to the Galaxy",
-    author: "DOUGLAS ADAMS",
-    status: 'available'
-  },
-
-  {
-    title: "Absurdistan",
-    author: "GARY SHTEYNGART",
-    status: 'available'
-  }
-];
-
-  // wraps for loop into one function for ease of use - also much cleaner code. 
+  // ------------- BOOKS ARRAY ----------------------------// 
+    // wraps for loop into one function for ease of use - also much cleaner code. 
   var renderLibrary = function() {
-
     // iterates through the each of the books 
     for (var i = 0; i < books.length; i += 1) {
       var x = books[i];
 
         // for each book iterated through, the title, author and status are passed to the library div listed in HTML.  
-
         var newLibHtml = libraryTemplate(x);
+
+        // this .append command adds the object vs replacing the prior one. 
         $('#library').append(newLibHtml);
     }
   };
 
-// calls the renderLibrary function, which iterates through the books array. 
-renderLibrary();
+  // calls the renderLibrary function, which iterates through the books array.   
+  renderLibrary();
 
+
+  
+  //this is an event handler.  It recieves the values submitted by the title and author fields. 
+  $('#submit').on('click', function () {
+    var new_title = $("#new_title").val();
+    var new_author = $("#new_author").val();
+    
+  // this takes the values received and submits them to the values: title and author. 
+  // book status is hardcoded as available.  
+    var newLibHtml = libraryTemplate({ 
+      title: new_title, 
+      author: new_author,
+      status: "available"
+   });
+
+   $('#library').append(newLibHtml); 
+  });
 
 
 
